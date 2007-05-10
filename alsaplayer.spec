@@ -1,14 +1,15 @@
 %define major       0
 %define libname     %mklibname %name %major
-%define build_flac 0
+%define build_flac 1
 
 Name:		alsaplayer
 Summary:	Advanced Linux Sound Architecture (ALSA) player
-Version: 0.99.77
+Version: 0.99.78
 Release: %mkrel 1
 Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version.tar.bz2
 Source1:	%name-icons.tar.bz2
 Patch:		alsaplayer-0.99.75-gcc33.patch
+Patch1: alsaplayer-0.99.78-desktop.patch
 URL:		http://www.alsaplayer.org/
 License:	GPL
 BuildRoot:	%_tmppath/%name-%version-root
@@ -149,6 +150,7 @@ This plugin adds some nice graphical visualization plugins (scopes).
 %prep
 %setup -q -n %name-%version
 %patch
+%patch1 -p1
 
 %build
 %configure2_5x --enable-alsa --enable-esd --disable-debug --enable-oggvorbis --enable-prefer-mad --disable-gtk --enable-gtk2
@@ -171,20 +173,6 @@ title="Alsa Player"\
 command="%{name}"\
 icon="%name.png" xdg="true"
 EOF
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
-[Desktop Entry]
-Encoding=UTF-8
-Name=Alsa Player
-Comment=The Alsa Player
-Exec=%{name} %U
-Icon=%name
-Terminal=false
-Type=Application
-StartupNotify=true
-Categories=X-MandrivaLinux-Multimedia-Sound;Audio;Player;
-EOF
-
 
 tar xfj %SOURCE1 -C %buildroot/%_datadir
 # fix permissions:
@@ -207,7 +195,7 @@ rm -rf %buildroot
 %defattr(-, root, root)
 %doc docs/*.txt
 %doc COPYING
-%_datadir/applications/mandriva*
+%_datadir/applications/*.desktop
 %_menudir/%name
 %_bindir/*
 %dir %_libdir/%name
