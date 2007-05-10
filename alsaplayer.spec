@@ -10,6 +10,7 @@ Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version.tar.bz2
 Source1:	%name-icons.tar.bz2
 Patch:		alsaplayer-0.99.75-gcc33.patch
 Patch1: alsaplayer-0.99.78-desktop.patch
+Patch2: alsaplayer-0.99.78-64bit.patch
 URL:		http://www.alsaplayer.org/
 License:	GPL
 BuildRoot:	%_tmppath/%name-%version-root
@@ -151,6 +152,7 @@ This plugin adds some nice graphical visualization plugins (scopes).
 %setup -q -n %name-%version
 %patch
 %patch1 -p1
+%patch2 -p1
 
 %build
 %configure2_5x --enable-alsa --enable-esd --disable-debug --enable-oggvorbis --enable-prefer-mad --disable-gtk --enable-gtk2
