@@ -1,15 +1,16 @@
 %define major       0
 %define libname     %mklibname %name %major
 %define build_flac 1
+%define prerel rc1
 
 Name:		alsaplayer
 Summary:	Advanced Linux Sound Architecture (ALSA) player
-Version: 0.99.79
-Release: %mkrel 1
-Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version.tar.bz2
+Version: 0.99.80
+Release: %mkrel 0.%prerel.1
+Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version-%prerel.tar.bz2
 Source1:	%name-icons.tar.bz2
 Patch:		alsaplayer-0.99.75-gcc33.patch
-Patch1: alsaplayer-0.99.78-desktop.patch
+Patch1: alsaplayer-0.99.80-rc1-desktopentry.patch
 Patch2: alsaplayer-0.99.78-64bit.patch
 URL:		http://www.alsaplayer.org/
 License:	GPL
@@ -149,9 +150,9 @@ This plugin adds a nice graphical interface to alsaplayer.
 This plugin adds some nice graphical visualization plugins (scopes).
 
 %prep
-%setup -q -n %name-%version
+%setup -q -n %name-%version-%prerel
 %patch
-%patch1 -p1
+%patch1 -p1 -b .desktopentry
 %patch2 -p1
 
 %build
@@ -283,6 +284,7 @@ rm -rf %buildroot
 %defattr(-, root, root)
 %doc COPYING
 %_libdir/%name/scopes/liboglspectrum.so
+%_libdir/%name/scopes2
 %if 0
 #gw these need gtk+ 1.2
 %_libdir/%name/scopes/libblurscope.so
