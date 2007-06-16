@@ -29,7 +29,7 @@ BuildRequires:  libnas-devel
 BuildRequires:  libsndfile-devel
 BuildRequires:  libxosd-devel
 Requires: 	%{name}-plugin-ui-gtk
-ExcludeArch:	ppc sparc sparc64
+ExcludeArch:	sparc sparc64
 Obsoletes: alsaplayer-plugin-read-curl
 Provides: alsaplayer-plugin-read-curl
 
