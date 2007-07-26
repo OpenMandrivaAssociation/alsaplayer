@@ -1,7 +1,8 @@
 %define major       0
 %define libname     %mklibname %name %major
+%define libnamedev     %mklibname -d %name
 %define build_flac 1
-%define prerel rc1
+%define prerel rc2
 
 Name:		alsaplayer
 Summary:	Advanced Linux Sound Architecture (ALSA) player
@@ -9,9 +10,7 @@ Version: 0.99.80
 Release: %mkrel 0.%prerel.1
 Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version-%prerel.tar.bz2
 Source1:	%name-icons.tar.bz2
-Patch:		alsaplayer-0.99.75-gcc33.patch
-Patch1: alsaplayer-0.99.80-rc1-desktopentry.patch
-Patch2: alsaplayer-0.99.78-64bit.patch
+Patch1: alsaplayer-0.99.80-rc2-desktopentry.patch
 URL:		http://www.alsaplayer.org/
 License:	GPL
 BuildRoot:	%_tmppath/%name-%version-root
@@ -47,14 +46,14 @@ Obsoletes: libalsaplayer
 %description -n %libname
 This is the shared librairy of AlsaPlayer.
 
-%package -n %libname-devel
+%package -n %libnamedev
 Summary:    AlsaPlayer devel stuff 
 Group:      Development/C
 Requires: %libname = %version
-Provides: libalsaplayer-devel
-Obsoletes: libalsaplayer-devel
+Provides: libalsaplayer-devel = %version-%release
+Obsoletes: %mklibname -d alsaplayer 0
 
-%description -n %libname-devel
+%description -n %libnamedev
 This is the development part of the AlsaPlayer librairy. 
 
 
@@ -151,16 +150,14 @@ This plugin adds some nice graphical visualization plugins (scopes).
 
 %prep
 %setup -q -n %name-%version-%prerel
-%patch
 %patch1 -p1 -b .desktopentry
-%patch2 -p1
 
 %build
 %configure2_5x --enable-alsa --enable-esd --disable-debug --enable-oggvorbis --enable-prefer-mad --disable-gtk --enable-gtk2
 %make
 
 %install
-rm -rf %buildroot
+rm -rf %buildroot %name.lang
  %makeinstall_std
 #clean unpackaged files:
 rm -rf %buildroot%_datadir/doc/alsaplayer
@@ -181,6 +178,8 @@ tar xfj %SOURCE1 -C %buildroot/%_datadir
 # fix permissions:
 chmod 755 docs/reference/html
 
+%find_lang %name
+
 %post
 %update_menus
 
@@ -194,7 +193,7 @@ chmod 755 docs/reference/html
 rm -rf %buildroot
 
 # TV: update me aka on each new upstream release, check for new plugins
-%files
+%files -f %name.lang
 %defattr(-, root, root)
 %doc docs/*.txt
 %doc COPYING
@@ -224,7 +223,7 @@ rm -rf %buildroot
 %_libdir/libalsaplayer.so.0.0.2
 %_libdir/libalsaplayer.so.0
 
-%files  -n %libname-devel
+%files  -n %libnamedev
 %defattr(-, root, root)
 %doc COPYING
 %doc docs/reference/html/
@@ -283,16 +282,4 @@ rm -rf %buildroot
 %files plugin-scopes
 %defattr(-, root, root)
 %doc COPYING
-%_libdir/%name/scopes/liboglspectrum.so
 %_libdir/%name/scopes2
-%if 0
-#gw these need gtk+ 1.2
-%_libdir/%name/scopes/libblurscope.so
-%_libdir/%name/scopes/liblogbarfft.so
-%_libdir/%name/scopes/libsynaescope.so
-%_libdir/%name/scopes/liblevelmeter.so
-%_libdir/%name/scopes/libmonoscope.so
-%_libdir/%name/scopes/libspacescope.so
-%endif
-
-
