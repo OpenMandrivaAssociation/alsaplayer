@@ -2,7 +2,7 @@
 %define libname     %mklibname %name %major
 %define libnamedev     %mklibname -d %name
 %define build_flac 1
-%define prerel rc2
+%define prerel rc3
 
 Name:		alsaplayer
 Summary:	Advanced Linux Sound Architecture (ALSA) player
