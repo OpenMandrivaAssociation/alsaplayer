@@ -2,15 +2,13 @@
 %define libname     %mklibname %name %major
 %define libnamedev     %mklibname -d %name
 %define build_flac 1
-%define prerel rc4
 
 Name:		alsaplayer
 Summary:	Advanced Linux Sound Architecture (ALSA) player
 Version: 0.99.80
-Release: %mkrel 0.%prerel.1
-Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version-%prerel.tar.bz2
+Release: %mkrel 1
+Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version.tar.bz2
 Source1:	%name-icons.tar.bz2
-Patch1: alsaplayer-0.99.80-rc2-desktopentry.patch
 URL:		http://www.alsaplayer.org/
 License:	GPL
 BuildRoot:	%_tmppath/%name-%version-root
@@ -149,8 +147,7 @@ This plugin adds a nice graphical interface to alsaplayer.
 This plugin adds some nice graphical visualization plugins (scopes).
 
 %prep
-%setup -q -n %name-%version-%prerel
-%patch1 -p1 -b .desktopentry
+%setup -q -n %name-%version
 
 %build
 %configure2_5x --enable-alsa --enable-esd --disable-debug --enable-oggvorbis --enable-prefer-mad --disable-gtk --enable-gtk2
