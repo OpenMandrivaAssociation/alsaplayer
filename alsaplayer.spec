@@ -11,7 +11,6 @@ Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version.tar.bz2
 Source1:	%name-icons.tar.bz2
 URL:		http://www.alsaplayer.org/
 License:	GPL
-BuildRoot:	%_tmppath/%name-%version-root
 Group:		Sound
 BuildRequires:	libalsa-devel  
 BuildRequires:	esound-devel
