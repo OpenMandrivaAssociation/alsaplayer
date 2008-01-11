@@ -160,16 +160,6 @@ rm -rf %buildroot %name.lang
 rm -rf %buildroot%_datadir/doc/alsaplayer
 rm -rf %buildroot%_libdir/%name/*/*.la
 
-mkdir -p $RPM_BUILD_ROOT{%_menudir,%_datadir}
-cat << EOF > $RPM_BUILD_ROOT%_menudir/%name
-?package(%name):\
-needs="x11"\
-longtitle="The Alsa Player" \
-section="Multimedia/Sound"\
-title="Alsa Player"\
-command="%{name}"\
-icon="%name.png" xdg="true"
-EOF
 
 tar xfj %SOURCE1 -C %buildroot/%_datadir
 # fix permissions:
@@ -195,7 +185,6 @@ rm -rf %buildroot
 %doc docs/*.txt
 %doc COPYING
 %_datadir/applications/*.desktop
-%_menudir/%name
 %_bindir/*
 %dir %_libdir/%name
 %dir %_libdir/%name/*/
