@@ -6,7 +6,7 @@
 Name:		alsaplayer
 Summary:	Advanced Linux Sound Architecture (ALSA) player
 Version: 0.99.80
-Release: %mkrel 2
+Release: %mkrel 4
 Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version.tar.bz2
 Source1:	%name-icons.tar.bz2
 URL:		http://www.alsaplayer.org/
