@@ -6,11 +6,12 @@
 Name:		alsaplayer
 Summary:	Advanced Linux Sound Architecture (ALSA) player
 Version: 0.99.80
-Release: %mkrel 4
+Release: %mkrel 3
 Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version.tar.bz2
 Source1:	%name-icons.tar.bz2
+Patch: alsaplayer-0.99.80-gcc4.3.patch
 URL:		http://www.alsaplayer.org/
-License:	GPL
+License:	GPLv3+
 BuildRoot:	%_tmppath/%name-%version-root
 Group:		Sound
 BuildRequires:	libalsa-devel  
@@ -148,8 +149,10 @@ This plugin adds some nice graphical visualization plugins (scopes).
 
 %prep
 %setup -q -n %name-%version
+%patch -p1
 
 %build
+%define _disable_ld_no_undefined 1
 %configure2_5x --enable-alsa --enable-esd --disable-debug --enable-oggvorbis --enable-prefer-mad --disable-gtk --enable-gtk2
 %make
 
