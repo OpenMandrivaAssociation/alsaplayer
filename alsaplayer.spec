@@ -9,7 +9,8 @@ Version: 0.99.80
 Release: %mkrel 3
 Source:		ftp://ftp.alsa-project.org/pub/people/andy/%name-%version.tar.bz2
 Source1:	%name-icons.tar.bz2
-Patch: alsaplayer-0.99.80-gcc4.3.patch
+Patch0: alsaplayer-0.99.80-gcc4.3.patch
+Patch1: alsaplayer-0.99.80-fix-str-fmt.patch
 URL:		http://www.alsaplayer.org/
 License:	GPLv3+
 BuildRoot:	%_tmppath/%name-%version-root
@@ -149,7 +150,8 @@ This plugin adds some nice graphical visualization plugins (scopes).
 
 %prep
 %setup -q -n %name-%version
-%patch -p1
+%patch0 -p1
+%patch1 -p1 -b .strfmt
 
 %build
 %define _disable_ld_no_undefined 1
