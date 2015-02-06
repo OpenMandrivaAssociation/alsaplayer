@@ -5,7 +5,7 @@
 Summary:	Advanced Linux Sound Architecture (ALSA) player
 Name:		alsaplayer
 Version:	0.99.81
-Release:	2
+Release:	3
 License:	GPLv3+
 Group:		Sound
 Url:		http://www.alsaplayer.org/
