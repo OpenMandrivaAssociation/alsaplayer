@@ -8,7 +8,7 @@ Version:	0.99.81
 Release:	3
 License:	GPLv3+
 Group:		Sound
-Url:		http://www.alsaplayer.org/
+Url:		https://www.alsaplayer.org/
 Source0:	http://www.alsaplayer.org/%{name}-%{version}.tar.bz2
 Source1:	%{name}-icons.tar.bz2
 BuildRequires:	libmikmod-devel
